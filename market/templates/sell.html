@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}
+    Sell Your Own Item 
+{% endblock %}
+
+{% block content %}
+<br><br>
+<body class="text-center">
+    <div class="container">
+        <form method="POST" class="form-additem" style="color:white">
+            {{ form.hidden_tag() }}
+            <h1 class="h3 mb-3 font-weight-normal">
+                Please Add your Item to be sold
+            </h1>
+            <br>
+            {{ form.itemname.label() }}
+            {{ form.itemname(class="form-control", placeholder="Item Name") }}
+
+            {{ form.price.label() }}
+            {{ form.price(class="form-control", placeholder="Price") }}
+
+            {{ form.barcode.label() }}
+            {{ form.barcode(class="form-control", placeholder="Barcode") }}
+
+            {{ form.description.label() }}
+            {{ form.description(class="form-control", placeholder="Description") }}
+          
+            {{ form.image_filename.label() }}
+            {{ form.image_filename(class="form-control", placeholder="Add Your Image Link") }}
+
+            <br>
+
+
+            {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+
+        </form>
+    </div>
+    <br>
+    <br>
+</body>
+{% endblock %}

@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, HiddenField ,IntegerField,FileField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from market.models import User
@@ -44,5 +45,5 @@ class SellYourItemForm(FlaskForm):
     price= IntegerField(label='Price:', validators=[DataRequired()])
     barcode= StringField(label='Barcode:', validators=[DataRequired()])
     description= StringField(label='Description:', validators=[DataRequired()])
-    image_filename= StringField(label='Description:', validators=[DataRequired()])
+    image_filename = FileField('Item Image', validators=[FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])
     submit = SubmitField(label='Sell Item!')

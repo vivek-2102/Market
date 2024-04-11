@@ -15,6 +15,7 @@
           <!-- -->
           {{ item.name }}
         </h5>
+         
         <button type="button" class="close"
                 data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -22,7 +23,9 @@
       </div>
       <div class="modal-body">
         <div>
-        <img src="{{item.image_filename}}"width="100%" alt="No image Found">
+          <img src="{{ url_for('send_file', filename=item.image_filename)}}" alt="Your Image" width="100%">
+
+
       </div>
       </div>
       <div class="modal-footer">

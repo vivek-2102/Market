@@ -113,30 +113,30 @@ def logout_page():
 def sell_page():
     form=SellYourItemForm()
     if request.method=="POST":
-         file_storage = form.image_filename.data
-         if file_storage:  # If a file was actually uploaded
-            filename = secure_filename(file_storage.filename)  # Secure the filename
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)  # Define where to save the file
-            file_storage.save(filepath)  # Save the file to the filesystem
+        #  file_storage = form.image_filename.data
+        #  if file_storage:  # If a file was actually uploaded
+        #     filename = secure_filename(file_storage.filename)  # Secure the filename
+        #     filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)  # Define where to save the file
+        #     file_storage.save(filepath)  # Save the file to the filesystem
             
-            print(filename)
-            print(filepath)
-            print(file_storage)
+        #     print(filename)
+        #     print(filepath)
+        #     print(file_storage)
             # Now you can create your Item with the filename or filepath
             item_to_create = Item(name=form.itemname.data,
                                   price=form.price.data,
                                   barcode=form.barcode.data,
-                                  description=form.description.data,
-                                  image_filename=filename)
-         db.session.add(item_to_create)
-         db.session.commit()
-         s_item_object = Item.query.filter_by(name=item_to_create.name).first()
-         s_item_object.sell(current_user)
-         flash(f"Congratulations! You sold {s_item_object.name} back to market!", category='success')
-         if form.errors != {}: #If there are not errors from the validations
-            for err_msg in form.errors.values():
+                                  description=form.description.data)
+                                #   image_filename=filename
+    db.session.add(item_to_create)
+    db.session.commit()
+    s_item_object = Item.query.filter_by(name=item_to_create.name).first()
+    s_item_object.sell(current_user)
+    flash(f"Congratulations! You sold {s_item_object.name} back to market!", category='success')
+    if form.errors != {}: #If there are not errors from the validations
+        for err_msg in form.errors.values():
                 flash(f'There was an error with creating a user: {err_msg}', category='danger')
-         return redirect(url_for("market_page"))
+        return redirect(url_for("market_page"))
 
     return render_template('sell.html',form=form)
 

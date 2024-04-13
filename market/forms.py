@@ -45,5 +45,5 @@ class SellYourItemForm(FlaskForm):
     price= IntegerField(label='Price:', validators=[DataRequired()])
     barcode= StringField(label='Barcode:', validators=[DataRequired()])
     description= StringField(label='Description:', validators=[DataRequired()])
-    image_filename = FileField('Item Image', validators=[FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])
+    # image_filename = FileField('Item Image', validators=[FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])
     submit = SubmitField(label='Sell Item!')

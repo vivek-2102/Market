@@ -113,11 +113,11 @@ def logout_page():
 def sell_page():
     form=SellYourItemForm()
     if request.method=="POST":
-        #  file_storage = form.image_filename.data
-        #  if file_storage:  # If a file was actually uploaded
-        #     filename = secure_filename(file_storage.filename)  # Secure the filename
-        #     filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)  # Define where to save the file
-        #     file_storage.save(filepath)  # Save the file to the filesystem
+         file_storage = form.image_filename.data
+         if file_storage:  # If a file was actually uploaded
+            filename = secure_filename(file_storage.filename)  # Secure the filename
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)  # Define where to save the file
+            file_storage.save(filepath)  # Save the file to the filesystem
             
         #     print(filename)
         #     print(filepath)
@@ -126,8 +126,8 @@ def sell_page():
             item_to_create = Item(name=form.itemname.data,
                                   price=form.price.data,
                                   barcode=form.barcode.data,
-                                  description=form.description.data)
-                                #   image_filename=filename
+                                  description=form.description.data,
+                                  image_filename=filename)
     db.session.add(item_to_create)
     db.session.commit()
     s_item_object = Item.query.filter_by(name=item_to_create.name).first()
